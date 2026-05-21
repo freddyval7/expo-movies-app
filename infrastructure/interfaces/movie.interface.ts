@@ -7,3 +7,11 @@ export interface Movie {
   backdrop: string;
   rating: number;
 }
+
+export interface DetailMovie extends Movie {
+  genres: string[];
+  duration: number;
+  budget: number;
+  originalTitle: string;
+  productionCompanies: string[];
+}
