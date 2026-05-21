@@ -2,9 +2,21 @@ import { MovieDBMoviesResponse } from "@/infrastructure/interfaces/moviedb-respo
 import { MovieMapper } from "@/infrastructure/mappers/movie.mapper";
 import { movieApi } from "../../api/movie-api";
 
-export const popularMoviesAction = async () => {
+interface Options {
+  page?: number;
+  limit?: number;
+}
+
+export const popularMoviesAction = async ({
+  page = 1,
+  limit = 10,
+}: Options) => {
   try {
-    const { data } = await movieApi.get<MovieDBMoviesResponse>("/popular");
+    const { data } = await movieApi.get<MovieDBMoviesResponse>("/popular", {
+      params: {
+        page,
+      },
+    });
 
     const movies = data.results.map(MovieMapper.fromTheMovieDBToMovie);
 
