@@ -1,4 +1,5 @@
-import { DetailMovie, Movie } from "../interfaces/movie.interface";
+import { MovieDBCast } from "../interfaces/castdb-response";
+import { Cast, DetailMovie, Movie } from "../interfaces/movie.interface";
 import { Result } from "../interfaces/moviedb-response";
 import { MovieDBResult } from "../interfaces/moviedb-result";
 
@@ -31,4 +32,18 @@ export class MovieMapper {
       productionCompanies: movie.production_companies.map((c) => c.name),
     };
   };
+}
+
+export class CastMapper {
+  static fromMovieDBCastToEntity(actor: MovieDBCast): Cast {
+    return {
+      id: actor.id,
+      name: actor.name,
+      character: actor.character ?? "No character",
+      avatar: actor.profile_path
+        ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
+        : "https://i.stack.imgur.com/l60Hf.png", // If actor does not have
+      // image
+    };
+  }
 }

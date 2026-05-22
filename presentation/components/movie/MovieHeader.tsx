@@ -13,9 +13,10 @@ interface Props {
   poster: string;
   originalTitle: string;
   title: string;
+  movieYear: Date;
 }
 
-const MovieHeader = ({ title, originalTitle, poster }: Props) => {
+const MovieHeader = ({ title, originalTitle, poster, movieYear }: Props) => {
   const { height: screenHeight } = useWindowDimensions();
 
   return (
@@ -66,7 +67,9 @@ const MovieHeader = ({ title, originalTitle, poster }: Props) => {
 
       <View className="px-5 mt-6">
         <Text className="font-normal">{originalTitle}</Text>
-        <Text className="font-semibold text-2xl">{title}</Text>
+        <Text className="font-semibold text-2xl">
+          {title} ({movieYear.getFullYear()})
+        </Text>
       </View>
     </>
   );
